@@ -1,4 +1,4 @@
-<h1>Firebase User Auth Demo</h1>
+<!--<h1>Firebase User Auth Demo</h1>
 
 <p>
   Learn more about 
@@ -14,18 +14,6 @@
       <i class="fa fa-google fa-lg"></i> Connect Google
     </button>
 
-    <button (click)="signInWithGithub()" class="button btn-social btn-github" disabled>
-      <i class="fa fa-github fa-lg"></i> Connect GitHub
-    </button>
-
-    <button (click)="signInWithFacebook()" class="button  btn-social btn-facebook" disabled>
-      <i class="fa fa-facebook fa-lg"></i> Connect Facebook
-    </button>
-
-    <button (click)="signInWithTwitter()" class="button  btn-social btn-twitter" disabled>
-      <i class="fa fa-twitter fa-lg"></i> Connect Twitter
-    </button>
-
     <hr>
 
     <h3>Anonymous Login</h3>
@@ -38,6 +26,30 @@
 
     <user-form></user-form>
 
+</div>
+
+<ng-template #alreadyLoggedIn>
+  <p class="text-success">
+    You are logged in <i class="fa fa-thumbs-up"></i>
+  </p>
+</ng-template>-->
+
+<div class="bg"></div>
+<div class="panel"><input type="radio" id="switch-open" name="switch" /><input type="radio" id="switch-close" name="switch" />
+    <div class="login">
+        <h1>LOGIN</h1>
+        <button (click)="signInWithGoogle()" class="button btn-social btn-google">
+          <i class="fa fa-google fa-lg"></i> Connect Google
+        </button>
+        <div class="group"><i class="fa fa-envelope" aria-hidden="true"></i><input type="text" id="email" placeholder="E-Mail" /><label for="email"></label></div>
+        <div class="group"><i class="fa fa-unlock-alt" aria-hidden="true"></i><input type="password" id="password" placeholder="Password" /><label for="password"></label></div><input type="submit" value="LOGIN" /></div>
+    <div class="register"><label class="button-open" for="switch-open"></label><label class="button-close" for="switch-close"></label>
+        <div class="inner">
+            <h1>REGISTER</h1>
+            <div class="group"><i class="fa fa-user" aria-hidden="true"></i><input type="text" id="name" placeholder="Name" /><label for="name"></label></div>
+            <div class="group"><i class="fa fa-envelope" aria-hidden="true"></i><input type="text" id="email" placeholder="E-Mail" /><label for="email"></label></div>
+            <div class="group"><i class="fa fa-unlock-alt" aria-hidden="true"></i><input type="password" id="password" placeholder="Password" /><label for="password"></label></div><input type="submit" value="REGISTER" /></div>
+    </div>
 </div>
 
 <ng-template #alreadyLoggedIn>

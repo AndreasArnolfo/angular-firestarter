@@ -1,0 +1,303 @@
+//Variables
+$background-body:#f1f1f1;
+$color-primary:#292c3b; // Login Background Default #292c3b
+$color-secondary:#f25d59; //Register Background Default #f25d59
+$color-font:#aaabb0;
+$color-font-2:#ffffff;
+$font-family:'Lato', sans-serif ;
+//Google Font
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
+//Font Awesome
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+//PlaceHolders
+%form-login{
+  width:100%;
+  border:none;
+  color:$color-font-2;
+  padding:14px 10px 14px 45px;
+  margin-top:20px;
+  background:lighten($color-primary,5%);
+  z-index:2;
+  font-family:$font-family;
+  font-size:12px;
+  letter-spacing:1px;
+  position:relative;
+  &:focus + label::before{
+    width:100%;
+  }
+}
+%form-register{
+  width:100%;
+  border:none;
+  color:$color-font-2;
+  padding:14px 10px 14px 45px;
+  margin-top:20px;
+  background:lighten($color-secondary,5%);
+  z-index:2;
+  font-family:$font-family;
+  font-weight:300;
+  font-size:12px;
+  letter-spacing:1px;
+  position:relative;
+  &::placeholder{
+    color:$color-font-2;
+  }
+   &:focus + label::before{
+    width:100%;
+  }
+}
+%submit{
+  align-self:flex-start;
+  margin-top:20px;
+  padding:10px 0;
+  width:150px;
+  background:transparent;
+  border-radius:0 50px 50px 0;
+  border-left:none !important;
+  letter-spacing:1px;
+  cursor:pointer;
+}
+//Mixins
+@mixin pseudo($pseudo){
+  &::#{$pseudo}{
+    content:'';
+    position:absolute;
+    @content;
+  }
+}
+//Keyframes
+@keyframes loginOpen{
+  0%{transform: translateX(140px);}
+  50%{transform: translateX(-145px);}
+  100%{transform: translateX(140px); z-index:-1;}
+}
+@keyframes registerOpen{
+  0%{transform: translateX(-140px);}
+  50%{transform: translateX(145px);}
+  100%{transform: translateX(-140px);}
+}
+
+
+@keyframes loginClose{
+  0%{transform: translateX(140px); z-index:-1;}
+  50%{transform: translateX(-145px);}
+  100%{transform: translateX(140px); z-index:1;}
+}
+@keyframes registerClose{
+  0%{transform: translateX(-140px);}
+  50%{transform: translateX(145px);}
+  100%{transform: translateX(-140px);}
+}
+*{
+  box-sizing:border-box;
+  //outline:black 1px solid ;
+}
+input{
+  outline:none;
+}
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:$font-family;
+  color:$color-font;
+} // body end 
+.bg{
+  width:100%;
+  height:50vh;
+  background:$background-body;
+  position:absolute;
+  top:-80px; left:0;
+  padding-bottom:80px;
+  box-sizing:initial;
+  z-index:-1;
+  transform:skewY(5deg);
+} //.bg end
+.panel{
+  width:640px;
+  height:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  .login{
+    width:300px;
+    height:380px;
+    background:$color-primary;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    transform:translateX(140px);
+    position:relative;
+    z-index:1;
+    transition:filter .5s;
+    input[type="submit"]{
+      @extend %submit;
+      border:$color-secondary solid 1px;
+      color:$color-secondary;
+    }
+  } //.login end
+  .register{
+    transform:translateX(-140px);
+    position:relative;
+    .button-open,.button-close{
+      position:absolute;
+      width:20px;
+      height:20px;
+      top:15px; right:15px;
+      cursor:pointer;
+      transition:transform .4s;
+      z-index:9;
+      @include pseudo(before){
+        width:2px;
+        height:100%;
+        background:$color-font-2;
+        left:10px;
+      }
+      @include pseudo(after){
+        width:2px;
+        height:100%;
+        background:$color-font-2;
+        left:10px;
+        transform:rotate(90deg);
+      }
+    }
+    .inner{
+      filter:blur(5px);
+      background:$color-secondary;
+      box-shadow:5px 14px 20px 0 lighten($color-secondary,10%);
+      width:100%;
+      width:340px;
+      height:440px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      transition:filter .5s;
+    }//inner end 
+    input[type="submit"]{
+      @extend %submit;
+      border:$color-font-2 solid 1px;
+      color:$color-font-2;
+    }
+  } //.register end
+} //.panel end
+.register h1{
+  text-align:center;
+  font-weight:100;
+  letter-spacing:2px;
+  margin-top:0;
+  color:$color-font-2;
+} //register h1 end 
+.register .group{
+  width:100%;
+  position:relative;
+  input[type="text"],input[type="password"]{
+    @extend %form-register;
+  }
+   i{
+    color:$color-font-2;
+    position:absolute;
+    top:36px; left:15px;
+    z-index:3;
+    font-size:13px;
+    opacity:.8;
+  }
+  label{
+    display:block;
+    position:absolute;
+    width:100%;
+    height:45px;
+    z-index:1;
+    background:lighten($color-secondary,12%);
+    top:19px;
+    @include pseudo(before){
+      width:0;
+      height:100%;
+      background:darken($color-secondary,5%);
+      transition:width .5s;
+    }
+  } //label end 
+} //.register .group end
+.login h1{
+  text-align:center;
+  font-weight:100;
+  letter-spacing:2px;
+  margin-top:0;
+  color: #fff;
+} //.login h1 end
+.login .group{
+  position:relative;
+  width:100%;
+  input[type="text"],input[type="password"]{
+    @extend %form-login;
+  }
+  i{
+    color:$color-secondary;
+    position:absolute;
+    top:36px; left:15px;
+    z-index:3;
+    font-size:13px;
+    opacity:.8;
+  }
+  label{
+    display:block;
+    position:absolute;
+    width:100%;
+    height:45px;
+    z-index:1;
+    background:lighten($color-primary,12%);
+    top:19px;
+    @include pseudo(before){
+      width:0;
+      height:100%;
+      background:$color-secondary;
+      transition:width .5s;
+    }
+  } //label end 
+} // .login .group end
+.button-close{
+  visibility:hidden;
+}
+//Checked....
+input[id="switch-open"]:checked {
+  //Panel Settings
+  ~.login{
+    filter:blur(5px);
+    animation:loginOpen forwards .8s;
+  }
+  ~.register{
+   animation:registerOpen forwards .8s; 
+    > .inner{
+      filter:blur(0);
+    }
+  }
+  //Open Close Button Settings..
+  ~.register .button-open{
+    visibility:hidden;
+    transform:rotate(45deg);
+  }
+  ~.register .button-close{
+    visibility:visible;
+    transform:rotate(45deg);
+  }
+}
+
+input[id="switch-close"]:checked {
+  ~.login{
+    animation:loginClose forwards .8s;
+  }
+  ~.register{
+    animation:registerClose forwards .8s;
+    > .inner{
+      filter:blur(5px);
+    }
+  }
+}
+
+/////
+
+input[type="radio"]{
+  display:none;
+}
